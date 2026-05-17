@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ATHLENCE — Global tokens
+ * Mobile-first. Dark by default per brief §6.
+ * Light only on /privacy and /terms via [data-theme="paper"].
+ */
+:root {
+  --ink: #0a0a0b;
+  --ink-2: #111114;
+  --ink-3: #1a1a1f;
+  --chrome: #c7ccd1;
+  --chrome-hi: #eff2f5;
+  --chrome-lo: #5a5f66;
+  --signal: #e11d2a;
+  --signal-hot: #ff2a3a;
+  --electric: #7cc4ff;
+  --paper: #f5f4f0;
+
+  --font-display: 'Druk Wide', 'Anton', 'Impact', sans-serif;
+  --font-body: 'Söhne', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  color-scheme: dark;
+}
+
+[data-theme='paper'] {
+  --ink: var(--paper);
+  --ink-2: #ebe9e3;
+  --chrome-hi: #0a0a0b;
+  --chrome: #2a2a2f;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--chrome-hi);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Brief §10 — visible focus rings on dark backgrounds, signal red */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Brief §10 — skip link first focusable element */
+.skip-link {
+  position: absolute;
+  top: -100px; left: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--chrome-hi);
+  border: 1px solid var(--signal);
+  transition: top 180ms ease;
+}
+.skip-link:focus { top: 16px; }
+
+::selection { background: var(--signal); color: var(--chrome-hi); }
+
+/* Brief §6 — chrome metallic text */
+.chrome-text {
+  background: linear-gradient(180deg,
+    var(--chrome-hi) 0%,
+    var(--chrome) 38%,
+    var(--chrome-lo) 62%,
+    var(--chrome-hi) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.chrome-shimmer {
+  background: linear-gradient(110deg,
+    var(--chrome-lo) 0%, var(--chrome-hi) 45%,
+    var(--chrome) 55%, var(--chrome-lo) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Cinematic vignette */
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+/* Film grain */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Brief §6 + §10 — honour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* iOS safe area for sticky CTA */
+.safe-bottom { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
