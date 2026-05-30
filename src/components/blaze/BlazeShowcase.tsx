@@ -120,40 +120,10 @@ export function BlazeShowcase() {
    Acts as the reduced-motion / no-WebGL fallback for the showcase. */
 function BlazeCanSVG() {
   return (
-    <svg viewBox="0 0 240 360" className="w-auto h-full drop-shadow-2xl" aria-hidden="true">
-      <defs>
-        <linearGradient id="canBody" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stopColor="#0a0a0b" />
-          <stop offset="40%" stopColor="#2a2a2f" />
-          <stop offset="55%" stopColor="#c7ccd1" />
-          <stop offset="70%" stopColor="#2a2a2f" />
-          <stop offset="100%" stopColor="#0a0a0b" />
-        </linearGradient>
-        <linearGradient id="canRim" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stopColor="#5a5f66" />
-          <stop offset="50%" stopColor="#eff2f5" />
-          <stop offset="100%" stopColor="#5a5f66" />
-        </linearGradient>
-        <linearGradient id="canBand" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stopColor="#7a0f17" />
-          <stop offset="50%" stopColor="#ff2a3a" />
-          <stop offset="100%" stopColor="#7a0f17" />
-        </linearGradient>
-      </defs>
-      <rect x="40" y="40" width="160" height="280" rx="6" fill="url(#canBody)" />
-      <rect x="40" y="40" width="160" height="14" fill="url(#canRim)" />
-      <ellipse cx="120" cy="40" rx="80" ry="6" fill="#1a1a1f" stroke="url(#canRim)" strokeWidth="2" />
-      <rect x="40" y="306" width="160" height="14" fill="url(#canRim)" />
-      <rect x="40" y="190" width="160" height="36" fill="url(#canBand)" />
-      <text x="120" y="214" textAnchor="middle" fontFamily="Druk Wide, Anton, sans-serif" fontWeight="700" fontSize="20" fill="#eff2f5" letterSpacing="4">BLAZE</text>
-      <text x="120" y="100" textAnchor="middle" fontFamily="Druk Wide, Anton, sans-serif" fontWeight="700" fontSize="9" fill="#c7ccd1" letterSpacing="3" opacity="0.7">ATHLENCE</text>
-      <g fill="#eff2f5" opacity="0.18">
-        <circle cx="70" cy="120" r="1.5" />
-        <circle cx="180" cy="160" r="2" />
-        <circle cx="60" cy="240" r="1.2" />
-        <circle cx="170" cy="270" r="1.8" />
-        <circle cx="90" cy="280" r="1" />
-      </g>
-    </svg>
+    <img
+      src="/blaze-can-front.png"
+      alt="BLAZE Energy Drink"
+      className="h-full w-auto object-contain drop-shadow-2xl"
+    />
   );
 }
