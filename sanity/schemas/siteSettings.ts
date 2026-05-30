@@ -8,7 +8,6 @@ export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // no create / delete
   fields: [
     defineField({
       name: 'title',

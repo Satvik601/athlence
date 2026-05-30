@@ -8,7 +8,7 @@ export const culture = defineType({
   name: 'culture',
   title: 'Culture',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
+
   fields: [
     defineField({
       name: 'eyebrow',

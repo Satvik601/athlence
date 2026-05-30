@@ -8,7 +8,6 @@ export const vision = defineType({
   name: 'vision',
   title: 'Vision (The Movement)',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'eyebrow',

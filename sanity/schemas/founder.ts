@@ -8,7 +8,7 @@ export const founder = defineType({
   name: 'founder',
   title: 'Founder (The Story)',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
+
   fields: [
     defineField({
       name: 'eyebrow',

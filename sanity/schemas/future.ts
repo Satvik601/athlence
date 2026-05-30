@@ -8,7 +8,6 @@ export const future = defineType({
   name: 'future',
   title: 'Future Products',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'eyebrow',

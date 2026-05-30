@@ -2,7 +2,8 @@
 
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, ContactShadows } from '@react-three/drei';
+import * as THREE from 'three';
+import { Environment, ContactShadows, useTexture} from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import type { Group } from 'three';
 import { prefersReducedMotion, saveDataEnabled, whenIdle } from '@/lib/motion';
@@ -34,32 +35,39 @@ import { prefersReducedMotion, saveDataEnabled, whenIdle } from '@/lib/motion';
 
 function BlazeCan() {
   const ref = useRef<Group>(null);
+const texture = useTexture('/blaze-can-texture.png');
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.ClampToEdgeWrapping;
+texture.repeat.set(1, 1);
+texture.offset.set(0.73, 0);
+texture.needsUpdate = true;
+
   useFrame((state) => {
     if (!ref.current) return;
     const t = state.clock.elapsedTime;
     ref.current.rotation.y = t * 0.26;
     ref.current.position.y = Math.sin(t * 1.05) * 0.08;
   });
-
   // PROCEDURAL CAN — placeholder until /3d/blaze-can.glb is delivered.
   return (
     <group ref={ref} dispose={null}>
       <mesh castShadow receiveShadow>
-        <cylinderGeometry args={[0.55, 0.55, 1.6, 64]} />
-        <meshStandardMaterial color="#1a1a1f" metalness={0.85} roughness={0.22} envMapIntensity={1.4} />
+        <cylinderGeometry args={[0.32, 0.32, 1.5, 64]} />
+        <meshStandardMaterial map={texture} metalness={0.6} roughness={0.3} envMapIntensity={1.2} />
       </mesh>
-      <mesh position={[0, 0.8, 0]} castShadow>
-        <torusGeometry args={[0.55, 0.04, 16, 64]} />
-        <meshStandardMaterial color="#c7ccd1" metalness={1} roughness={0.15} />
-      </mesh>
-      <mesh position={[0, -0.8, 0]} castShadow>
-        <torusGeometry args={[0.55, 0.04, 16, 64]} />
-        <meshStandardMaterial color="#c7ccd1" metalness={1} roughness={0.15} />
-      </mesh>
-      <mesh position={[0, 0.1, 0]}>
-        <cylinderGeometry args={[0.553, 0.553, 0.18, 64]} />
-        <meshStandardMaterial color="#e11d2a" metalness={0.4} roughness={0.4} emissive="#e11d2a" emissiveIntensity={0.15} />
-      </mesh>
+
+      {/* Top cap */}
+<mesh position={[0, 0.76, 0]}>
+  <cylinderGeometry args={[0.28, 0.32, 0.06, 64]} />
+  <meshStandardMaterial color="#6a6a7a" metalness={1} roughness={0.1} />
+</mesh>
+{/* Bottom cap */}
+<mesh position={[0, -0.76, 0]}>
+  <cylinderGeometry args={[0.32, 0.28, 0.06, 64]} />
+  <meshStandardMaterial color="#6a6a7a" metalness={1} roughness={0.1} />
+</mesh>
+
+     
     </group>
   );
 }
@@ -101,7 +109,7 @@ export function BlazeCanScene() {
         <Canvas
           dpr={[1, 1.75]}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-          camera={{ position: [0, 0, 3.4], fov: 32 }}
+          camera={{ position: [0, 0, 6.5], fov: 24}}
           frameloop="always"
         >
           <ambientLight intensity={0.18} />
