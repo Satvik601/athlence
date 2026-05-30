@@ -48,9 +48,9 @@ export function Nav() {
         }`}
       >
         <nav aria-label="Primary" className="container flex items-center justify-between h-16 md:h-20">
-          <a href="#hero" className="font-display text-xl md:text-2xl uppercase tracking-[0.04em] text-chrome-hi" aria-label="ATHLENCE home">
-            ATHLENCE
-          </a>
+         <a href="#hero" aria-label="ATHLENCE home" className="flex items-center">
+  <img src="/Final_Logo.png" alt="ATHLENCE" className="h-24 md:h-28 w-auto" />
+</a>
           <ul className="hidden md:flex items-center gap-8">
             {LINKS.map((l) => (
               <li key={l.href}>
